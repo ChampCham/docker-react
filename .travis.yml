@@ -7,3 +7,23 @@ before_install:
 script:
   #-- --coverage to return the test result to travis
   - docker run -e CI=true champignons/docker-react yarn test
+deploy:
+  #   edge: true
+  provider: elasticbeanstalk
+  region: 'us-east-2'
+  app: 'docker-test'
+  env: 'DockerTest-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-074424411472'
+  bucket_path: 'docker-test'
+  #Every time that put into banch master it will deploy
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
+#DockerTest-env.m7pzd6gwdm.us-east-2.elasticbeanstalk.com
+#region = us-east-2
+#app = docker-test
+#env = DockerTest-env
+#bucket_name find in S3 in aws
+#bucket_path = app
