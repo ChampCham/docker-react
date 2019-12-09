@@ -11,7 +11,8 @@ RUN yarn build
 
 #Run phase
 FROM nginx
-
+#PORT MAP for aws
+EXPOSE 80
 #Copy build folder from Build phase (builder)
 COPY --from=builder /app/build /usr/share/nginx/html
 
