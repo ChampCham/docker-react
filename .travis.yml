@@ -1,0 +1,9 @@
+language: generic
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t champignons/docker-react -f Dockerfile.dev .
+script:
+  #-- --coverage to return the test result to travis
+  - docker run -e CI=true champignons/docker-react yarn test
